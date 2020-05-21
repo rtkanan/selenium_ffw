@@ -1,7 +1,11 @@
 from selenium.webdriver.common.by import By
 from base.selenium_webdriver import SeleniumDriver
+import utilities.custom_logger as logger
+import logging
 
 class LoginPage(SeleniumDriver):
+    log = logger.customLogger(logging.DEBUG)
+
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
@@ -11,6 +15,7 @@ class LoginPage(SeleniumDriver):
     _email_field = "user_email"
     _pwd_field = "user_password"
     _login_button = "//input[@value='Log In']"
+    _gravatar = "//img[@class='gravatar']"
 
     # Actions
     def clickLoginLink(self):
@@ -32,3 +37,6 @@ class LoginPage(SeleniumDriver):
         self.enterPassword(password)
         self.clickLoginButton()
 
+    def verifyLoginSuccessful(self):
+        gravatar = self.isElementPresent(self._gravatar, "xpath")
+        return gravatar

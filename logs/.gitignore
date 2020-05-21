@@ -1,0 +1,3 @@
+# This is to ensure only the parent folder is tracked by git
+*
+!.gitignore

@@ -1,5 +1,4 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from pages.home.login_page import LoginPage
 import unittest
 
@@ -14,11 +13,11 @@ class LoginTests(unittest.TestCase):
         lp = LoginPage(driver)
         lp.login('test@email.com', "abcabc")
 
-        gravatar = driver.find_element_by_xpath("//img[@class='gravatar']")
-        if gravatar is not None:
-            print("Login Successful")
-        else:
-            print("Login Failed")
+        gravatar = lp.verifyLoginSuccessful()
+        assert gravatar == True
 
-loginTest = LoginTests()
-loginTest.testLogin()
+        driver.quit()
+
+if __name__ == "__main__":
+    loginTest = LoginTests()
+    loginTest.testLogin()
