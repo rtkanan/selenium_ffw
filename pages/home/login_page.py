@@ -16,6 +16,7 @@ class LoginPage(SeleniumDriver):
     _pwd_field = "user_password"
     _login_button = "//input[@value='Log In']"
     _gravatar = "//img[@class='gravatar']"
+    _invalid_msg = "//div[contains(@class, 'alert-danger') and contains(text(), 'Invalid email or password')]"
 
     # Actions
     def clickLoginLink(self):
@@ -31,7 +32,7 @@ class LoginPage(SeleniumDriver):
         self.clickElement(self._login_button, "xpath")
 
     # Functionality
-    def login(self, username, password):
+    def login(self, username="", password=""):
         self.clickLoginLink()
         self.enterEmail(username)
         self.enterPassword(password)
@@ -40,3 +41,7 @@ class LoginPage(SeleniumDriver):
     def verifyLoginSuccessful(self):
         gravatar = self.isElementPresent(self._gravatar, "xpath")
         return gravatar
+
+    def verifyLoginFailure(self):
+        result = self.isElementPresent(self._invalid_msg, "xpath")
+        return result

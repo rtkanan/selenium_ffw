@@ -48,7 +48,7 @@ class SeleniumDriver():
             self.log.info(f"Clicked on the identified element with locator: {locator} and locatorType: {locatorType}")
         except:
             self.log.info(f"Cannot click on the element with locator: {locator} and locatorType: {locatorType}")
-            print_stack()
+            # print_stack()
     
     def sendKeys(self, data, locator, locatorType="id"):
         try:
@@ -58,7 +58,7 @@ class SeleniumDriver():
             self.log.info(f"Entered data in the element with locator: {locator} and locatorType: {locatorType}")
         except:
             self.log.info(f"Not able to enter the data in the element with locator: {locator} and locatorType: {locatorType}")
-            print_stack()
+            # print_stack()
 
     # Todo this can be merged with getElement itself
     def isElementPresent(self, locator, locatorType="id"):
@@ -101,5 +101,5 @@ class SeleniumDriver():
             self.log.info("Element appeared on the web page")
         except:
             self.log.info("Element not appeared on the web page")
-            print_stack()
+            # print_stack()
         return element
