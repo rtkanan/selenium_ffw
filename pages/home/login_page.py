@@ -45,3 +45,8 @@ class LoginPage(SeleniumDriver):
     def verifyLoginFailure(self):
         result = self.isElementPresent(self._invalid_msg, "xpath")
         return result
+    
+    def verifyTitle(self, title):
+        if title in self.driver.title: return True 
+        # if "Let's Code It" in self.driver.title: return True # Forcing the verification to fail
+        return False
