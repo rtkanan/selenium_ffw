@@ -1,9 +1,9 @@
 from selenium.webdriver.common.by import By
-from base.selenium_webdriver import SeleniumDriver
+from pages.base_page import BasePage
 import utilities.custom_logger as logger
 import logging
 
-class LoginPage(SeleniumDriver):
+class LoginPage(BasePage):
     log = logger.customLogger(logging.DEBUG)
 
     def __init__(self, driver):
@@ -46,7 +46,5 @@ class LoginPage(SeleniumDriver):
         result = self.isElementPresent(self._invalid_msg, "xpath")
         return result
     
-    def verifyTitle(self, title):
-        if title in self.driver.title: return True 
-        # if "Let's Code It" in self.driver.title: return True # Forcing the verification to fail
-        return False
+    def verifyLoginTitle(self, title):
+        return self.verifyPageTitle(title)

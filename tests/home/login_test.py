@@ -14,7 +14,7 @@ class LoginTests(unittest.TestCase):
 
     def testInvalidLogin(self):
         self.lp.login()
-        title_result = self.lp.verifyTitle("test")
+        title_result = self.lp.verifyLoginTitle("test")
         self.ts.mark(title_result, "Title Verification")
 
         lf_result = self.lp.verifyLoginFailure()
@@ -25,4 +25,3 @@ class LoginTests(unittest.TestCase):
         
         gravatar = self.lp.verifyLoginSuccessful()
         assert gravatar == True
-    

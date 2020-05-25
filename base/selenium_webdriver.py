@@ -5,6 +5,8 @@ from selenium.common import exceptions
 from traceback import print_stack
 import utilities.custom_logger as logger
 import logging
+import time
+import os
 
 class SeleniumDriver():
     log = logger.customLogger(logging.DEBUG)
@@ -103,3 +105,29 @@ class SeleniumDriver():
             self.log.info("Element not appeared on the web page")
             # print_stack()
         return element
+    
+    def getTitle(self):
+        """
+        Fetches the title of the current web page
+        """
+        return self.driver.title
+    
+    def takeScreenshot(self, fileNamePrefix):
+        """
+        Takes screenshot of the current web page
+        """
+        currentTime = str(round(time.time() * 1000))
+        fileName = f"{fileNamePrefix}_{currentTime}.png"
+        cwd = os.path.dirname(__file__)
+        screenshotPath = os.path.join(cwd, "..\\screenshots")
+        screenshotFilePath = os.path.join(screenshotPath, fileName)
+
+        try:
+            if not os.path.exists(screenshotPath):
+                os.makedirs(screenshotPath)
+            self.log.info(f"Save the screenshot: {screenshotFilePath}")
+            self.driver.save_screenshot(screenshotFilePath)
+        except:
+            self.log.error("### Exception Occurred")
+            self.log.info(f"Not able save the screenshot: {screenshotFilePath}")
+            # print_stack()
