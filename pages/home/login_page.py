@@ -1,4 +1,3 @@
-from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 import utilities.custom_logger as logger
 import logging

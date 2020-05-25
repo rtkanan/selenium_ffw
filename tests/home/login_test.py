@@ -14,7 +14,7 @@ class LoginTests(unittest.TestCase):
 
     def testInvalidLogin(self):
         self.lp.login()
-        title_result = self.lp.verifyLoginTitle("test")
+        title_result = self.lp.verifyLoginTitle("Kode")
         self.ts.mark(title_result, "Title Verification")
 
         lf_result = self.lp.verifyLoginFailure()

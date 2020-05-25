@@ -40,7 +40,7 @@ class SeleniumDriver():
             element = self.driver.find_element(byType, locator)
             self.log.info(f"Element found with locator: {locator} and locatorType: {locatorType}")
         except:
-            self.log.info(f"Element not found with locator: {locator} and locatorType: {locatorType}")
+            self.log.error(f"### Exception occurred: Element not found with locator: {locator} and locatorType: {locatorType}")
         return element
     
     def getElementList(self, locator, locatorType="id"):
@@ -51,7 +51,7 @@ class SeleniumDriver():
             elements = self.driver.find_elements(byType, locator)
             self.log.info(f"Elements found with locator: {locator} and locatorType: {locatorType}")
         except:
-            self.log.info(f"Elements not found with locator: {locator} and locatorType: {locatorType}")
+            self.log.error(f"### Exception occurred: Elements not found with locator: {locator} and locatorType: {locatorType}")
         return elements
     
     def clickElement(self, locator="", locatorType="id", element=None):
@@ -59,9 +59,9 @@ class SeleniumDriver():
             if locator:
                 element = self.getElement(locator, locatorType)
             element.click()
-            self.log.info(f"Clicked on the identified element with locator: {locator} and locatorType: {locatorType}")
+            self.log.info(f"Clicked on the identified element.")
         except:
-            self.log.error(f"Cannot click on the element with locator: {locator} and locatorType: {locatorType}")
+            self.log.error(f"### Exception occurred: Cannot click on the element")
             # print_stack()
     
     def sendKeys(self, data, locator="", locatorType="id", element=None):
