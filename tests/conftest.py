@@ -1,6 +1,7 @@
 import pytest
 from selenium import webdriver
 from base.webdriver_factory import WebDriverFactory
+from pages.home.login_page import LoginPage
 
 # This decorator is used to mark the function as a fixture.
 # @pytest.yield_fixture() # Works in all the versions
@@ -19,10 +20,13 @@ def cSetup(request, browser):
 
     base_url = "https://letskodeit.teachable.com/"
     driver.get(base_url)
+
+    lp = LoginPage(driver)
+    lp.login('test@email.com', "abcabc")
     
     if request.cls is not None:
         request.cls.driver = driver
-    yield driver
+    yield
     driver.quit()
     print("Execute after each module")
 
