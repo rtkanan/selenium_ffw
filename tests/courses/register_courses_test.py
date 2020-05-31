@@ -13,7 +13,12 @@ class RegisterCoursesTests(unittest.TestCase):
         self.ts = TestStatus(self.driver)
     
     def testInvalidEnrollment(self):
+        cc_no = "4111 1111 1111 1111"
+        cc_exp_date = "0225"
+        cc_cvc = "123"
+        cc_pin = "12345"
+
         self.rcp.searchCourse("javascript")
         self.rcp.selectCourse("JavaScript for beginners")
-        self.rcp.enroll()
+        self.rcp.enroll(cc_no, cc_exp_date, cc_cvc, cc_pin)
         

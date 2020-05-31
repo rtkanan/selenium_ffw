@@ -39,9 +39,9 @@ class RegisterCoursesPage(BasePage):
         self.clickElement(element=element)
     
     def enterDataInIframe(self, data, iframe_locator, elem_locator):
-        self.driver.switch_to.frame(iframe_locator)
+        self.switch_to_frame(iframe_locator)
         self.sendKeys(data, elem_locator, "xpath")
-        self.driver.switch_to.default_content()
+        self.switch_to_default()
     
     def clickTermsCheckbox(self):
         self.clickElement(self._terms)
@@ -58,20 +58,15 @@ class RegisterCoursesPage(BasePage):
         self.clickCourse(course_title)
         self.clickEnrollButton()
     
-    def enterCreditCardDetails(self):
-        cc_no = "4111 1111 1111 1111"
-        cc_exp_date = "0225"
-        cc_cvc = "123"
-        cc_pin = "12345"
-
+    def enterCreditCardDetails(self, cc_no="", cc_exp_date="", cc_cvc="", cc_pin=""):
         self.scroll()        
         self.enterDataInIframe(cc_no, "__privateStripeFrame12", self._cc_num)
         self.enterDataInIframe(cc_exp_date, "__privateStripeFrame13", self._cc_exp_date)
         self.enterDataInIframe(cc_cvc, "__privateStripeFrame14", self._cc_cvc)
         self.enterDataInIframe(cc_pin, "__privateStripeFrame15", self._cc_pin)
 
-    def enroll(self):
-        self.enterCreditCardDetails()
+    def enroll(self, cc_no, cc_exp_date, cc_cvc, cc_pin):
+        self.enterCreditCardDetails(cc_no, cc_exp_date, cc_cvc, cc_pin)
         self.clickTermsCheckbox()
         self.clickEnrollSubmit()
         self.util.sleep(15)

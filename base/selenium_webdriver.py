@@ -173,8 +173,7 @@ class SeleniumDriver():
             self.log.info(f"Save the screenshot: {screenshotFilePath}")
             self.driver.save_screenshot(screenshotFilePath)
         except:
-            self.log.error("### Exception Occurred")
-            self.log.info(f"Not able save the screenshot: {screenshotFilePath}")
+            self.log.error(f"### Exception Occurred: Not able save the screenshot: {screenshotFilePath}")
             # print_stack()
     
     def scroll(self, direction="down"):
@@ -185,3 +184,14 @@ class SeleniumDriver():
         if direction.lower() == "up":
             # Scroll up
             self.driver.execute_script("window.scrollBy(0, -1000);")
+    
+    def switch_to_frame(self, locator=None):
+        # Swich to iframe
+        try:
+            self.driver.switch_to.frame(locator)
+        except:
+            self.log.error(f"### Exception Occurred: Not able to identify the iframe with locator {locator}")
+    
+    def switch_to_default(self):
+        # Swith to default content from any iframe
+        self.driver.switch_to.default_content()
