@@ -68,5 +68,9 @@ class RegisterCoursesPage(BasePage):
     def enroll(self, cc_no, cc_exp_date, cc_cvc, cc_pin):
         self.enterCreditCardDetails(cc_no, cc_exp_date, cc_cvc, cc_pin)
         self.clickTermsCheckbox()
-        self.clickEnrollSubmit()
-        self.util.sleep(15)
+        # self.clickEnrollSubmit()
+        # self.util.sleep(15)
+    
+    def verifyEnrollFailed(self):
+        result = self.isEnabled(locator=self._enroll_pay_button, info="Enroll Pay Button")
+        return not result

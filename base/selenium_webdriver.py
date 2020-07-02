@@ -195,3 +195,59 @@ class SeleniumDriver():
     def switch_to_default(self):
         # Swith to default content from any iframe
         self.driver.switch_to.default_content()
+    
+    def getElementAttributeValue(self, attribute, element=None, locator="", locatorType="id"):
+        """
+        Get value of the attribute of element
+
+        Parameters:
+            1. Required:
+                1. attribute - attribute whose value to find
+
+            2. Optional:
+                1. element   - Element whose attribute need to find
+                2. locator   - Locator of the element
+                3. locatorType - Locator Type to find the element
+
+        Returns:
+            Value of the attribute
+        Exception:
+            None
+        """
+        if locator:
+            element = self.getElement(locator=locator, locatorType=locatorType)
+        value = element.get_attribute(attribute)
+        return value
+
+    def isEnabled(self, locator, locatorType="id", info=""):
+        """
+        Check if element is enabled
+
+        Parameters:
+            1. Required:
+                1. locator - Locator of the element to check
+            2. Optional:
+                1. locatorType - Type of the locator(id(default), xpath, css, className, linkText)
+                2. info - Information about the element, label/name of the element
+        Returns:
+            boolean
+        Exception:
+            None
+        """
+        element = self.getElement(locator, locatorType=locatorType)
+        enabled = False
+        try:
+            attributeValue = self.getElementAttributeValue(element=element, attribute="disabled")
+            if attributeValue is not None:
+                enabled = element.is_enabled()
+            else:
+                value = self.getElementAttributeValue(element=element, attribute="class")
+                self.log.info("Attribute value From Application Web UI --> :: " + value)
+                enabled = not ("disabled" in value)
+            if enabled:
+                self.log.info("Element :: '" + info + "' is enabled")
+            else:
+                self.log.info("Element :: '" + info + "' is not enabled")
+        except:
+            self.log.error("Element :: '" + info + "' state could not be found")
+        return enabled

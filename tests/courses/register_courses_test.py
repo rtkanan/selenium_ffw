@@ -21,4 +21,7 @@ class RegisterCoursesTests(unittest.TestCase):
         self.rcp.searchCourse("javascript")
         self.rcp.selectCourse("JavaScript for beginners")
         self.rcp.enroll(cc_no, cc_exp_date, cc_cvc, cc_pin)
+        result = self.rcp.verifyEnrollFailed()
+        self.ts.markFinal("test_invalidEnrollment", result,
+                          "Enrollment Failed Verification")
         
